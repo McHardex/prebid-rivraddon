@@ -6,8 +6,7 @@ module.exports = {
   output: {
     filename: "riveraddon.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
-    filename: "rivraddon.js"
+    publicPath: '/'
   },
   module: {
     rules: [
