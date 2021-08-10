@@ -13,6 +13,7 @@ const API = (method, url, payload) => {
           });
       }
     }
+    console.log(payload)
     xhr.send(JSON.stringify(payload));
     xhr.onerror = function() {
       reject({
