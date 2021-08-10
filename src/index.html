@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <title>rivraddon</title>
+
+  <!-- PREBID.JS -->
+  <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
+  <script async src="https://cdn-ocean-rivr-simplaex-test.s3.amazonaws.com/simplaex-code-challenge/prebid.js"></script>
+  <script>
+    var sizes = [
+      [300, 250]
+    ];
+    var PREBID_TIMEOUT = 1000;
+    var FAILSAFE_TIMEOUT = 3000;
+
+    var adUnits = [{
+      code: '/19968336/header-bid-tag-1',
+      mediaTypes: {
+        banner: {
+          sizes: sizes
+        }
+      },
+      bids: [{
+        bidder: 'appnexus',
+        params: {
+          placementId: 13144370
+        }
+      }]
+    }];
+
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    googletag.cmd.push(function () {
+      googletag.pubads().disableInitialLoad();
+    });
+
+    var pbjs = pbjs || {};
+    pbjs.que = pbjs.que || [];
+
+    pbjs.que.push(function () {
+      pbjs.enableAnalytics({
+        provider: 'rivr',
+        options: {
+          clientID: 'testChallengeClientId',
+          authToken: 'testChallengeauthToken',
+          bannersIds: [],
+          siteCategories: []
+        }
+      });
+      pbjs.addAdUnits(adUnits);
+      pbjs.requestBids({
+        bidsBackHandler: initAdserver,
+        timeout: PREBID_TIMEOUT
+      });
+    });
+
+    function initAdserver() {
+      if (pbjs.initAdserverSet) return;
+      pbjs.initAdserverSet = true;
+      googletag.cmd.push(function () {
+        pbjs.setTargetingForGPTAsync && pbjs.setTargetingForGPTAsync();
+        googletag.pubads().refresh();
+      });
+    }
+
+    setTimeout(function () {
+      initAdserver();
+    }, FAILSAFE_TIMEOUT);
+
+    googletag.cmd.push(function () {
+      googletag.defineSlot('/19968336/header-bid-tag-1', sizes, 'div-1')
+        .addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+  </script>
+</head>
+
+<script defer src="index.js"></script>
+<body>
+  <div id='div-1'>
+
+  </div>
+    <script type='text/javascript'>
+      googletag.cmd.push(function () {
+        googletag.display('div-1');
+      });
+    </script>
+  </div>
+  <div> Prebid test</div>
+</body>
+
+</html>
