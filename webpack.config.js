@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: "riveraddon.js",
+    filename: "rivraddon.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: '/'
   },
