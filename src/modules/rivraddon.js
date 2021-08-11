@@ -1,17 +1,28 @@
-const API =  require('../services/api');
+const api = require("../services/api");
 
-var trackerUrl = 'https://tracker.simplaex-code-challenge.com';
+const trackerUrl = "https://tracker.simplaex-code-challenge.com";
 
-var rivraddon = {
+const rivraddon = {
   analytics: {
     enableAnalytics: function () {
-      console.log('SIMPLAEX CODE CHALLENGE LOG rivraddon analytics.enableAnalytics');
+      console.log(
+        "SIMPLAEX CODE CHALLENGE LOG rivraddon analytics.enableAnalytics"
+      );
     },
-    trackPbjsEvent: function(event) {
-      API('POST', trackerUrl, {eventType: event.eventType})
-    }
-  }
-}
+    trackPbjsEvent: function async(event) {
+      api("POST", trackerUrl, { eventType: event.eventType })
+        .then((res) =>
+          console.log("Successfully reported events to tracking URL")
+        )
+        .catch((error) => {
+          console.log(
+            error.message ||
+              `Unable to report event "${event.eventType}" to "${trackerUrl}"`
+          );
+        });
+    },
+  },
+};
 
 window.rivraddon = rivraddon;
 
